@@ -11,3 +11,6 @@ def index(req):
 
 def new(req):
     return render(req, "interviews/new.html")
+
+def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
+    return render(req, "interviews/show.html")
