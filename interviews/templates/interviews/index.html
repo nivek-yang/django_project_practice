@@ -4,4 +4,20 @@
 
 <a href="{% url "interviews:new" %}">新增面試</a>
 
-<p>請列出面試列表 {{ interviews }}</p>
+<p>請列出面試列表</p>
+
+<ul>
+{% for interview in interviews %}
+    <li>
+        <a href="/interviews/{{ interview.id }}">
+            <section>
+                <h2>{{ interview.position }}</h2>
+                <h3>{{ interview.company_name }}</h3>
+                <span>評價： {{ interview.rating }}/10</span>
+            </section>
+        </a>
+    </li>
+{% endfor %}
+</ul>
+
+
