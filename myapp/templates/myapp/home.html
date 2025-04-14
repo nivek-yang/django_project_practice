@@ -1,3 +1,5 @@
 <h1>Home</h1>
 
-{{ title }}
+{% comment %} {{ title }} {% endcomment %}
+
+<a href="{% url 'interviews:index' %}">面試列表</a>
