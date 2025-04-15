@@ -36,11 +36,39 @@ def new(req):
     return render(req, "interviews/new.html")
 
 def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
-    # 抓資料
-    # pk = primary key = 主鍵
-    # try:
-    #     interview = Interview.objects.get(pk=id)
-    # except:
-    #     raise Http404("Interview does not exist")
+    if req.POST:
+        company_name = req.POST['company_name']
+        position = req.POST['position']
+        interview_date = req.POST['interview_date']
+        rating = req.POST['rating']
+        review = req.POST['review']
+        result = req.POST['result']
+        
+        interview = get_object_or_404(Interview, pk=id)
+
+        interview.company_name = company_name
+        interview.position = position
+        interview.interview_date = interview_date
+        interview.rating = rating
+        interview.review = review
+        interview.result = result
+
+        # 更新
+        interview.save()
+        return redirect("interviews:show", interview.id)
+
+    else:
+        # 抓資料
+        # pk = primary key = 主鍵
+        # try:
+        #     interview = Interview.objects.get(pk=id)
+        # except:
+        #     raise Http404("Interview does not exist")
+        interview = get_object_or_404(Interview, pk=id)
+        return render(req, "interviews/show.html", {"interview": interview})
+
+def edit(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
     interview = get_object_or_404(Interview, pk=id)
-    return render(req, "interviews/show.html", {"interview": interview})
+
+
+    return render(req, "interviews/edit.html", {"interview": interview})
