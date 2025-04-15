@@ -5,7 +5,23 @@ from django.http import HttpResponse, Http404
 # Create your views here.
 def index(req):
     if req.POST:
-        print(req.POST["company_name"])
+        # 新增
+        company_name = req.POST['company_name']
+        position = req.POST['position']
+        interview_date = req.POST['interview_date']
+        rating = req.POST['rating']
+        review = req.POST['review']
+        result = req.POST['result']
+
+        interview = Interview.objects.create(
+            company_name=company_name,
+            position=position,
+            interview_date=interview_date,
+            rating=rating,
+            review=review,
+            result=result,
+        )
+        
         return HttpResponse("新增")
     else:
         # 抓面試列表
