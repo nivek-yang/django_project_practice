@@ -1,10 +1,14 @@
-<h1>公司：  {{ interview.company_name }}</h1>
+<h1>公司: {{ interview.company_name }}</h1>
+<h2>職位: {{ interview.position }}</h2>
+<h2>面試日期: {{ interview.interview_date }}</h2>
+<h3>評分: {{ interview.rating }}/10</h3>
+<p>心得: {{ interview.review }}</p>
 
 <a href="{% url "interviews:index" %}">回上一頁</a>
 
 <a href="{% url "interviews:edit" interview.id %}">編輯</a>
 
-<form action="{% url "interviews:delete" interview.id %}" method="post">
+<form action="{% url "interviews:delete" interview.id %}" method="post" onsubmit="return confirm('是否確認刪除？')">
     {% csrf_token %}
     <button>刪除</button>
 </form>
