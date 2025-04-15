@@ -27,9 +27,11 @@
         <label for="review">心得</label>
         <textarea name="review" id="review">{{ interview.review }}</textarea>
     </div>
-    <div>
-        <input type="submit" value="更新">
-    </div>
+
+    <a href="{% url "interviews:index" %}">回面試列表</a>
+    <a href="{% url "interviews:show" interview.id %}">回上一頁</a>
+    <input type="submit" value="更新">
+
     
     
 </form>

@@ -1,3 +1,10 @@
 <h1>公司：  {{ interview.company_name }}</h1>
 
+<a href="{% url "interviews:index" %}">回上一頁</a>
+
 <a href="{% url "interviews:edit" interview.id %}">編輯</a>
+
+<form action="{% url "interviews:delete" interview.id %}" method="post">
+    {% csrf_token %}
+    <button>刪除</button>
+</form>

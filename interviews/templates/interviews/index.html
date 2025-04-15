@@ -1,6 +1,6 @@
 <h1>面試列表</h1>
 
-<a href="/interviews/new">新增面試</a>
+{% comment %} <a href="/interviews/new">新增面試</a> {% endcomment %}
 
 <a href="{% url "interviews:new" %}">新增面試</a>
 
@@ -13,8 +13,8 @@
         {% comment %} <a href="/interviews/{{ interview.id }}"> {% endcomment %}
         
             <section>
-                <h2>{{ interview.position }}</h2>
-                <h3>{{ interview.company_name }}</h3>
+                <h2>{{ interview.company_name }}</h2>
+                <h3>{{ interview.position }}</h3>
                 <span>評價： {{ interview.rating }}/10</span>
             </section>
         </a>
