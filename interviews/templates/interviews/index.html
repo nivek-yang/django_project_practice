@@ -9,7 +9,9 @@
 <ul>
 {% for interview in interviews %}
     <li>
-        <a href="/interviews/{{ interview.id }}">
+        <a href="{% url "interviews:show" interview.id %}">
+        {% comment %} <a href="/interviews/{{ interview.id }}"> {% endcomment %}
+        
             <section>
                 <h2>{{ interview.position }}</h2>
                 <h3>{{ interview.company_name }}</h3>

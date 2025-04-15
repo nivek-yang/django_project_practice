@@ -2,6 +2,40 @@
 
 <a href="{% url 'interviews:index' %}">回面試列表</a>
 
-<form>
-
+{% comment %} HTML 只支援 GET POST 兩種 method {% endcomment %}
+{% comment %} PUT/PATCH DELETE 用 javascript 執行 (fetch/axios) {% endcomment %}
+{% comment %} django 對於 form post 行為會做檢查，沒有 csrf token 的話，送過來的資料都視為偽造 {% endcomment %}
+{% comment %} csrf 跨站請求偽造: 另外寫 code 攻擊 {% endcomment %}
+{% comment %} django template 有內建 csrf_token {% endcomment %}
+{% comment %} input 裡的 "name" 才是給後端看的 {% endcomment %}
+{% comment %} name 不能重複 {% endcomment %}
+<form action="/interviews/" method="post">
+    {% csrf_token %}
+    {% comment %} <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}"> {% endcomment %}
+    <div>
+        <label for="company_name">公司名稱</label>
+        <input name="company_name" type="text" id="company_name">
+    </div>
+    <div>
+        <label for="position">職稱</label>
+        <input name="position" type="text" id="position">
+    </div>
+    <div>
+        <label for="interview_date">面試日期</label>
+        <input name="interview_date" type="date" id="interview_date">
+    </div>
+    <div>
+        <label for="result">面試日期</label>
+        <input name="result" type="text" id="interview_date">
+    </div>
+    <div>
+        <label for="review">心得</label>
+        <textarea name="review" id="review"></textarea>
+    </div>
+    <div>
+        <input type="submit" value="新增">
+        {% comment %} <button type="submit" id="add">新增</button> {% endcomment %}
+    </div>
+    
+    
 </form>
