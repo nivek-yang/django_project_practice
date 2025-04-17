@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Interview
+from .models import Interview, Comment
 from django.http import HttpResponse, Http404
 from django.urls import reverse
 from .forms import InterviewForm
@@ -90,7 +90,8 @@ def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
         #     interview = Interview.objects.get(pk=id)
         # except:
         #     raise Http404("Interview does not exist")
-        return render(req, "interviews/show.html", {"interview": interview})
+        comments = Comment.objects.filter(interview=interview)
+        return render(req, "interviews/show.html", {"interview": interview, "comments": comments})
 
 def edit(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
     interview = get_object_or_404(Interview, pk=id)
@@ -108,3 +109,24 @@ def delete(req, id):
     interview.delete()
 
     return redirect("interviews:index")
+
+def comment(req, id):
+    interview = get_object_or_404(Interview, pk=id)
+    # 建立留言
+
+    # Interview 角度
+    # 1 : N
+    # interview has many comments
+    # interview.comment_set
+    # comment_set 是虛擬的東西，不是真正的欄位，而是 QuerySet
+    # 拿 interview 資料的所有留言，讓新增的時候不用寫 id，較方便
+    interview.comment_set.create(content = req.POST['content'])
+    
+    # Comment 角度
+    # Comment.objects.create(content = req.POST['content'],
+    #                       # interview_id = id,
+    #                       interview=interview,
+    #                       )
+
+    # redirect
+    return redirect("interviews:show", id=interview.id)
