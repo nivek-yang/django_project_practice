@@ -74,6 +74,11 @@ def edit(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
 
 def delete(req, id):
     interview = get_object_or_404(Interview, pk=id)
+    # soft delete
+    # interview.is_delete = True
+    # interview.save()
+    
+    # hard delete
     interview.delete()
 
     return redirect("interviews:index")
