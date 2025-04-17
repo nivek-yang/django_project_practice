@@ -6,8 +6,10 @@ from .forms import InterviewForm
 
 # Create your views here.
 def index(req):
+
+    # 新增資料
     if req.POST:
-        form = InterviewForm(req.POST)
+        form = InterviewForm(req.POST) # 用 form 解決寫入資料庫麻煩的過程，沒有加 instance 參數代表想增加資料
         interview = form.save() # 成功儲存後回傳該 instance
 
         # 處理表單提交：新增面試記錄
@@ -40,25 +42,30 @@ def new(req):
     return render(req, "interviews/new.html")
 
 def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
-    if req.POST:
-        company_name = req.POST['company_name']
-        position = req.POST['position']
-        interview_date = req.POST['interview_date']
-        rating = req.POST['rating']
-        review = req.POST['review']
-        result = req.POST['result']
-        
-        interview = get_object_or_404(Interview, pk=id)
+    interview = get_object_or_404(Interview, pk=id)
 
-        interview.company_name = company_name
-        interview.position = position
-        interview.interview_date = interview_date
-        interview.rating = rating
-        interview.review = review
-        interview.result = result
+    # 更新資料，因為 HTML 只支援 GET, POST 兩種方法，用 POST 來達到 PUT/PATCH 的效果
+    if req.POST:
+        form = InterviewForm(req.POST, instance=interview) # 有加 instance 參數代表想更新資料
+        form.save()
+
+        # company_name = req.POST['company_name']
+        # position = req.POST['position']
+        # interview_date = req.POST['interview_date']
+        # rating = req.POST['rating']
+        # review = req.POST['review']
+        # result = req.POST['result']
+        
+        # interview.company_name = company_name
+        # interview.position = position
+        # interview.interview_date = interview_date
+        # interview.rating = rating
+        # interview.review = review
+        # interview.result = result
 
         # 更新
-        interview.save()
+        # interview.save()
+
         return redirect("interviews:show", interview.id)
 
     else:
@@ -68,7 +75,6 @@ def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
         #     interview = Interview.objects.get(pk=id)
         # except:
         #     raise Http404("Interview does not exist")
-        interview = get_object_or_404(Interview, pk=id)
         return render(req, "interviews/show.html", {"interview": interview})
 
 def edit(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
