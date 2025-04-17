@@ -2,28 +2,32 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Interview
 from django.http import HttpResponse, Http404
 from django.urls import reverse
+from .forms import InterviewForm
 
 # Create your views here.
 def index(req):
     if req.POST:
+        form = InterviewForm(req.POST)
+        interview = form.save() # 成功儲存後回傳該 instance
+
         # 處理表單提交：新增面試記錄
         # 從 POST 請求中獲取表單數據
-        company_name = req.POST['company_name']
-        position = req.POST['position']
-        interview_date = req.POST['interview_date']
-        rating = req.POST['rating']
-        review = req.POST['review']
-        result = req.POST['result']
+        # company_name = req.POST['company_name']
+        # position = req.POST['position']
+        # interview_date = req.POST['interview_date']
+        # rating = req.POST['rating']
+        # review = req.POST['review']
+        # result = req.POST['result']
 
         # 在資料庫中創建新的面試記錄
-        interview = Interview.objects.create(
-            company_name=company_name,
-            position=position,
-            interview_date=interview_date,
-            rating=rating,
-            review=review,
-            result=result,
-        )
+        # interview = Interview.objects.create(
+        #     company_name=company_name,
+        #     position=position,
+        #     interview_date=interview_date,
+        #     rating=rating,
+        #     review=review,
+        #     result=result,
+        # )
         
         return redirect("interviews:show", id=interview.id)
     else:
