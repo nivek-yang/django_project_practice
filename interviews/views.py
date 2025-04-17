@@ -85,12 +85,25 @@ def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
     else:
         # 抓資料
         # pk = primary key = 主鍵
+
+        # --------------------------------------
         # DEPRECATED: 舊的實作方式
+        # 用 get_object_or_404 替代 (已移到 if 條件之外)
         # try:
-        #     interview = Interview.objects.get(pk=id)
+        #   interview = Interview.objects.get(pk=id)
         # except:
-        #     raise Http404("Interview does not exist")
-        comments = Comment.objects.filter(interview=interview)
+        #   raise Http404("Interview does not exist")
+        # --------------------------------------
+        
+        # --------------------------------------
+        # DEPRECATED: Comment 角度抓取 interview 的所有留言
+        # 改用 Interview 角度
+
+        # comments = Comment.objects.filter(interview=interview)
+        # --------------------------------------
+        
+        # Interview 角度
+        comments = interview.comment_set.all()
         return render(req, "interviews/show.html", {"interview": interview, "comments": comments})
 
 def edit(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
@@ -123,10 +136,15 @@ def comment(req, id):
     interview.comment_set.create(content = req.POST['content'])
     
     # Comment 角度
+    # --------------------------------------
+    # DEPRECATED: 
+    # 改用 Interview 角度
+
     # Comment.objects.create(content = req.POST['content'],
     #                       # interview_id = id,
     #                       interview=interview,
     #                       )
-
+    # --------------------------------------
+    
     # redirect
     return redirect("interviews:show", id=interview.id)
