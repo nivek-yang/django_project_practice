@@ -9,33 +9,12 @@
 {% comment %} django template 有內建 csrf_token {% endcomment %}
 {% comment %} input 裡的 "name" 才是給後端看的 {% endcomment %}
 {% comment %} name 不能重複 {% endcomment %}
-<form action="/interviews/" method="post">
+<form action="/interviews/" method="post" onsubmit="return confirm('是否確定要新增資料？')">
     {% csrf_token %}
     {% comment %} <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}"> {% endcomment %}
-    <div>
-        <label for="company_name">公司名稱</label>
-        <input name="company_name" type="text" id="company_name">
-    </div>
-    <div>
-        <label for="position">職稱</label>
-        <input name="position" type="text" id="position">
-    </div>
-    <div>
-        <label for="interview_date">面試日期</label>
-        <input name="interview_date" type="date" id="interview_date">
-    </div>
-    <div>
-        <label for="rating">評分</label>
-        <input name="rating" type="number" id="rating">
-    </div>
-    <div>
-        <label for="result">結果</label>
-        <input name="result" type="text" id="interview_date">
-    </div>
-    <div>
-        <label for="review">心得</label>
-        <textarea name="review" id="review"></textarea>
-    </div>
+
+    {{ form }}
+
     <div>
         <input type="submit" value="新增">
         {% comment %} <button type="submit" id="add">新增</button> {% endcomment %}

@@ -12,6 +12,11 @@ def index(req):
         form = InterviewForm(req.POST) # 用 form 解決寫入資料庫麻煩的過程，沒有加 instance 參數代表想增加資料
         interview = form.save() # 成功儲存後回傳該 instance
 
+        # --------------------------------------
+        # DEPRECATED: 舊的實作方式
+        # 原因: 效能較差，程式碼冗長
+        # 替代方案: 使用 InterviewForm
+        
         # 處理表單提交：新增面試記錄
         # 從 POST 請求中獲取表單數據
         # company_name = req.POST['company_name']
@@ -30,6 +35,7 @@ def index(req):
         #     review=review,
         #     result=result,
         # )
+        # --------------------------------------
         
         return redirect("interviews:show", id=interview.id)
     else:
@@ -39,7 +45,8 @@ def index(req):
         return render(req, "interviews/index.html", {"interviews": interviews})
 
 def new(req):
-    return render(req, "interviews/new.html")
+    form = InterviewForm
+    return render(req, "interviews/new.html", {"form": form})
 
 def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
     interview = get_object_or_404(Interview, pk=id)
@@ -49,6 +56,11 @@ def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
         form = InterviewForm(req.POST, instance=interview) # 有加 instance 參數代表想更新資料
         form.save()
 
+        # --------------------------------------
+        # DEPRECATED: 舊的實作方式
+        # 原因: 效能較差，程式碼冗長
+        # 替代方案: 使用 InterviewForm
+        
         # company_name = req.POST['company_name']
         # position = req.POST['position']
         # interview_date = req.POST['interview_date']
@@ -66,11 +78,14 @@ def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
         # 更新
         # interview.save()
 
+        # --------------------------------------
+
         return redirect("interviews:show", interview.id)
 
     else:
         # 抓資料
         # pk = primary key = 主鍵
+        # DEPRECATED: 舊的實作方式
         # try:
         #     interview = Interview.objects.get(pk=id)
         # except:
@@ -79,8 +94,9 @@ def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
 
 def edit(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
     interview = get_object_or_404(Interview, pk=id)
+    form = InterviewForm(instance=interview)
     
-    return render(req, "interviews/edit.html", {"interview": interview})
+    return render(req, "interviews/edit.html", {"interview": interview, "form": form})
 
 def delete(req, id):
     interview = get_object_or_404(Interview, pk=id)
