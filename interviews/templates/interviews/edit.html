@@ -4,7 +4,19 @@
     {% csrf_token %}
     {% comment %} <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}"> {% endcomment %}
 
-    {{ form }}
+    {% for field in form %}
+        <div>
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {{ field }}
+            <div>
+                {{ field.help_text }}
+            </div>
+        </div>
+    {% endfor %}
+
+    {% comment %} {{ form }} default 是 as_div {% endcomment %}
+    {% comment %} {{ form.as_p }} 變成 p 標籤 {% endcomment %}
 
     <a href="{% url "interviews:index" %}">回面試列表</a>
     <a href="{% url "interviews:show" interview.id %}">回上一頁</a>
