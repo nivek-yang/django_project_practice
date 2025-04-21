@@ -1,3 +1,6 @@
+{% extends "layouts/default.html" %}
+
+{% block 'main'%}
 <h1>編輯: {{ interview.company_name }}</h1>
 
 <form action="{% url "interviews:show" interview.id %}" method="post" onsubmit="return confirm('是否確定要修改資料？')">
@@ -22,3 +25,7 @@
     <a href="{% url "interviews:show" interview.id %}">回上一頁</a>
     <input type="submit" value="更新">
 </form>
+
+{% endblock %}
+
+

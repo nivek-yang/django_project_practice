@@ -1,3 +1,6 @@
+{% extends "layouts/default.html" %}
+
+{% block 'main'%}
 <h1>公司: {{ interview.company_name }}</h1>
 <h2>職位: {{ interview.position }}</h2>
 <h2>面試日期: {{ interview.interview_date }}</h2>
@@ -26,3 +29,8 @@
     <textarea name="content" id=""></textarea>
     <button>新增留言</button>
 </form>
+{% endblock %}
+
+
+
+
