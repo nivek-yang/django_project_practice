@@ -1,15 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+# django decorator
+from django.views.decorators.http import require_POST
 
 # Create your views here.
+@require_POST
 def index(req):
-    if req.method == "POST":
-        form = UserCreationForm(req.POST)
-        if form.is_valid():
-            form.save()
+    form = UserCreationForm(req.POST)
+    if form.is_valid():
+        form.save()
 
-        return redirect("pages:index")
+    return redirect("pages:index")
     
 
 def sign_up(req):
@@ -21,18 +23,18 @@ def sign_in(req):
     # session 伺服器
     return render(req, "users/sign_in.html")
 
+@require_POST
 def create_session(req):
-    if req.method == "POST":
-        username = req.POST['username']
-        password = req.POST['password']
+    username = req.POST['username']
+    password = req.POST['password']
 
-        user = authenticate(
-            username=username,
-            password=password)
-        
-        if user is not None:
-            login(req, user) # cookie 給瀏覽器，session 存 server
+    user = authenticate(
+        username=username,
+        password=password)
+    
+    if user is not None:
+        login(req, user) # cookie 給瀏覽器，session 存 server
 
-            return redirect("pages:index")
-        else:
-            return redirect("users:sign_in")
+        return redirect("pages:index")
+    else:
+        return redirect("users:sign_in")
