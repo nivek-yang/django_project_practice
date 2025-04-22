@@ -1,8 +1,8 @@
 runserver:
-	uv run manage.py runserver
+	python manage.py runserver
 
 makemigrations:
-	uv run manage.py makemigrations
+	python manage.py makemigrations
 
 migrate:
-	uv run manage.py migrate
+	python manage.py migrate
