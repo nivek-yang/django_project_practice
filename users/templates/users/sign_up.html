@@ -2,6 +2,12 @@
 
 {% block main %}
 <h1>註冊帳號</h1>
+
+<form action="{% url 'users:sign_up' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button>註冊</button>
+</form>
 {% endblock  %}
 
 
