@@ -4,4 +4,22 @@
 
 <h1>登入帳號</h1>
 
+<form action="{% url 'users:login' %}" method="post">
+    {% csrf_token %}
+
+    <div class="flex gap-3 p-2">
+        <div>
+            <label for="">帳號</label>
+            <input type="text" name="username">
+        </div>
+    
+        <div>
+            <label for="">密碼</label>
+            <input type="text" name="password">
+        </div>
+    </div>
+
+    <button class="btn">登入</button>
+</form>
+
 {% endblock %}
