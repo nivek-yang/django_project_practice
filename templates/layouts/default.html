@@ -4,15 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>面試</title>
+
+    {% comment %} 掛載 daisyUI 和 Tailwind css CDN {% endcomment %}
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-    <nav>
+    {% include "shared/navbar.html" %}
+
+    {% comment %} <nav>
         <a href="{% url 'pages:index' %}">首頁</a>
         <a href="{% url 'pages:about' %}">關於我們</a>
         <a href="{% url 'pages:contact' %}">聯絡我們</a>
-    </nav>
+    </nav> {% endcomment %}
+    
     <main>{% block 'main' %}{% endblock %}</main>
-
-    <footer>2025 版權頁</footer>
+    {% include "shared/footer.html" %}
 </body>
 </html>
