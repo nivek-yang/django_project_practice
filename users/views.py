@@ -14,3 +14,6 @@ def index(req):
 def sign_up(req):
     form = UserCreationForm
     return render(req, "users/sign_up.html", {"form": form})
+
+def sign_in(req):
+    return render(req, "users/sign_in.html")
