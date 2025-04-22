@@ -2,6 +2,9 @@
 
 {% block main %}
 <h1>Home</h1>
+{% if request.user.is_authenticated %}
+    已登入
+{% endif %}
 
 <a href="{% url 'interviews:index' %}">面試列表</a>
 {% endblock %}

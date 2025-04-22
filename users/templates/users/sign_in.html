@@ -4,7 +4,7 @@
 
 <h1>登入帳號</h1>
 
-<form action="{% url 'users:login' %}" method="post">
+<form action="{% url 'users:create_session' %}" method="post">
     {% csrf_token %}
 
     <div class="flex gap-3 p-2">
