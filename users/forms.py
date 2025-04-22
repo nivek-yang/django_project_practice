@@ -11,3 +11,10 @@ class UserForm(ModelForm):
             'first_name',
             'last_name'
         ]
+        labels = {
+            'username': "帳號",
+            'password': "密碼",
+            'email': "信箱",
+            'first_name': "名",
+            'last_name': "姓",            
+        }

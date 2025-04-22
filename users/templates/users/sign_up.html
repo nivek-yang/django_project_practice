@@ -3,10 +3,10 @@
 {% block main %}
 <h1>註冊帳號</h1>
 
-<form action="{% url 'users:sign_up' %}" method="post">
+<form action="{% url 'users:index' %}" method="post">
     {% csrf_token %}
     {{ form }}
-    <button>註冊</button>
+    <button class="btn">註冊</button>
 </form>
 {% endblock  %}
 
