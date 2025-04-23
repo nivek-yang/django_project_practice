@@ -24,3 +24,5 @@ class Comment(models.Model):
     # 有幾種 on_delete 的方法：models.CASCADE, models.DO_NOTHING, models.RESTRICT, models.SET_NULL
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    

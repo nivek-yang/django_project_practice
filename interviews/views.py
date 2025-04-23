@@ -4,6 +4,7 @@ from django.http import HttpResponse, Http404
 from django.urls import reverse
 from .forms import InterviewForm
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 def index(req):
@@ -135,6 +136,8 @@ def delete(req, id):
 
     return redirect("interviews:index")
 
+@require_POST
+@login_required
 def comment(req, id):
     interview = get_object_or_404(Interview, pk=id)
     # 建立留言
@@ -145,7 +148,10 @@ def comment(req, id):
     # interview.comment_set
     # comment_set 是虛擬的東西，不是真正的欄位，而是 QuerySet
     # 拿 interview 資料的所有留言，讓新增的時候不用寫 id，較方便
-    interview.comment_set.create(content = req.POST['content'])
+    interview.comment_set.create(
+        content = req.POST['content'],
+        user=req.user
+        )
     
     # Comment 角度
     # --------------------------------------

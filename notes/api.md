@@ -71,7 +71,7 @@ interview = form.save(commit=False) 先把資料準備好，不存到資料庫
 interview.user = req.user
 interview.save()
 
-做法二： 字典合併
+做法二： 字典合併 (不可行，req.POST 不算是真正的字典)
 
 a = {'a': 1}
 b = {'b': 2}
@@ -81,4 +81,7 @@ c = a | b
 c = {**a, **b}
 
 form = InterviewForm(req.POST | {"user": req.user}) -> 看似可以但是不行
+
+---
+
 
