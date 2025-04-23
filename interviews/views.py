@@ -52,6 +52,7 @@ def new(req):
     form = InterviewForm
     return render(req, "interviews/new.html", {"form": form})
 
+@login_required
 def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
     interview = get_object_or_404(Interview, pk=id)
 
@@ -110,12 +111,14 @@ def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
         comments = interview.comment_set.all()
         return render(req, "interviews/show.html", {"interview": interview, "comments": comments})
 
+@login_required
 def edit(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
     interview = get_object_or_404(Interview, pk=id)
     form = InterviewForm(instance=interview)
     
     return render(req, "interviews/edit.html", {"interview": interview, "form": form})
 
+@login_required
 def delete(req, id):
     interview = get_object_or_404(Interview, pk=id)
     # soft delete

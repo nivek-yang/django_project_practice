@@ -18,3 +18,24 @@ js -> submit ->
 logout:
      delete /sessions (理論上)
      post users/logout (html 只能用 get/post)
+
+**QueryString**  /?a=1&b=2 當作網址參數
+
+
+---
+localhost/?a=1&b=2&c=3
+
+Python (在 django template 不能用):
+     request.GET['c'] => 3
+
+     def index(req):
+          a = req.GET['a']
+          b = req.GET['b']
+          c = req.GET['c']
+
+          return render(req, "pages/index.html, {"a": a, "b": b, "c": c})
+
+HTML:
+     <QueryDict>
+
+---
