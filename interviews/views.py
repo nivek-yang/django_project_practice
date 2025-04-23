@@ -45,8 +45,11 @@ def index(req):
         return render(req, "interviews/index.html", {"interviews": interviews})
 
 def new(req):
-    form = InterviewForm
-    return render(req, "interviews/new.html", {"form": form})
+    # 檢查是否有登入
+    if req.user.is_authenticated:
+        form = InterviewForm
+        return render(req, "interviews/new.html", {"form": form})
+    return redirect("users:sign_in")
 
 def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
     interview = get_object_or_404(Interview, pk=id)

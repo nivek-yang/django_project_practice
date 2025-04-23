@@ -19,7 +19,14 @@
       </ul>
     </div>
     <div class="navbar-end gap-2">
-      <a href="{% url 'users:sign_up' %}" class="btn">註冊</a>
-      <a href="{% url 'users:sign_in' %}" class="btn">登入</a>
+      {% if request.user.is_authenticated %}
+        <form action="{% url 'users:logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-neutral">登出</button>
+        </form>
+      {% else %}
+        <a href="{% url 'users:sign_up' %}" class="btn btn-neutral">註冊</a>
+        <a href="{% url 'users:sign_in' %}" class="btn">登入</a>
+      {% endif %}
     </div>
 </div>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 # django decorator
 from django.views.decorators.http import require_POST
 
@@ -38,3 +38,9 @@ def create_session(req):
         return redirect("pages:index")
     else:
         return redirect("users:sign_in")
+
+@require_POST
+def delete_session(req):
+    logout(req)
+
+    return redirect("pages:index")

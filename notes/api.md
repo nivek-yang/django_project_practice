@@ -12,3 +12,9 @@ js -> submit ->
             createElement
             DOM
 
+<a>: GET
+<form>: GET/POST
+
+logout:
+     delete /sessions (理論上)
+     post users/logout (html 只能用 get/post)
