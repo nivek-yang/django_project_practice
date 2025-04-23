@@ -3,6 +3,7 @@ from .models import Interview, Comment
 from django.http import HttpResponse, Http404
 from django.urls import reverse
 from .forms import InterviewForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(req):
@@ -44,12 +45,12 @@ def index(req):
         interviews = Interview.objects.order_by("-id") # 依 id 反向排序
         return render(req, "interviews/index.html", {"interviews": interviews})
 
+# 檢查是否有登入
+# @login_required(login_url="users:sign_in")
+@login_required
 def new(req):
-    # 檢查是否有登入
-    if req.user.is_authenticated:
-        form = InterviewForm
-        return render(req, "interviews/new.html", {"form": form})
-    return redirect("users:sign_in")
+    form = InterviewForm
+    return render(req, "interviews/new.html", {"form": form})
 
 def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
     interview = get_object_or_404(Interview, pk=id)
