@@ -27,7 +27,8 @@ def sign_in(req):
     # 字典裡沒有 next 會出錯
     # next = req.GET['next']
     
-    # 改用 get，沒有 next 不會出錯，用預設值 '/' 會回到首頁
+    # 改用 get，沒有 next 不會出錯，用預設值會回到首頁
+    # 用 reverse 讓使用者看不到首頁的 namespacing
     next = req.GET.get("next", reverse("pages:index"))
     
     return render(req, "users/sign_in.html", {"next": next})

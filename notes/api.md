@@ -39,3 +39,25 @@ HTML:
      <QueryDict>
 
 ---
+
+登入 -> 憑證
+操作 CRUD -> 授權
+
+---
+為 Interview model 建立 user 欄位
+
+user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+makemigrations 在新增欄位時如果沒設定 null=True 會遇到要設定預設值的問題
+假如多增加 user_id 欄位，原本建立的 interview 資料 沒有 user_id，
+但是 user_id 欄位 不應該是 null
+解決方法： 可以掛人頭帳號，先註冊一個使用者，把他的名字設為 "匿名使用者" ，以前的 interview 都是該使用者的
+
+在 makemigrations 時用 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+
+Select an option: 1
+Please enter the default value as valid Python.
+輸入 1 ， 代表將 user_id 設定為 1
+
+再用 migrate 更新資料庫
+這樣原本 interview 資料表裡會多出 user_id 欄位，值為 1
