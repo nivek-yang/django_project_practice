@@ -61,3 +61,24 @@ Please enter the default value as valid Python.
 
 再用 migrate 更新資料庫
 這樣原本 interview 資料表裡會多出 user_id 欄位，值為 1
+
+
+Create interview
+
+作法一：
+form = InterviewForm(req.POST)
+interview = form.save(commit=False) 先把資料準備好，不存到資料庫
+interview.user = req.user
+interview.save()
+
+做法二： 字典合併
+
+a = {'a': 1}
+b = {'b': 2}
+
+字典合併:
+c = a | b
+c = {**a, **b}
+
+form = InterviewForm(req.POST | {"user": req.user}) -> 看似可以但是不行
+

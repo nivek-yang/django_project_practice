@@ -11,8 +11,13 @@ def index(req):
     # 新增資料
     if req.POST:
         form = InterviewForm(req.POST) # 用 form 解決寫入資料庫麻煩的過程，沒有加 instance 參數代表想增加資料
-        interview = form.save() # 成功儲存後回傳該 instance
+        
+        # interview = form.save() # 成功儲存後回傳該 instance
 
+        # 加入 user 欄位
+        interview = form.save(commit=False) # 先把資料準備好，不存到資料庫
+        interview.user = req.user
+        interview.save()
         # --------------------------------------
         # DEPRECATED: 舊的實作方式
         # 原因: 效能較差，程式碼冗長
