@@ -44,6 +44,12 @@ HTML:
 操作 CRUD -> 授權
 
 ---
+
+@login_required 返回 LOGIN_URL 後會在網址後面加 QueryString ?next=<原本的 url>
+處理 next
+
+---
+
 為 Interview model 建立 user 欄位
 
 user = models.ForeignKey(User, on_delete=models.CASCADE)

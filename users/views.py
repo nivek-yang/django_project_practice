@@ -46,7 +46,7 @@ def create_session(req):
         login(req, user) # cookie 給瀏覽器，session 存 server
         # @login_required 返回 LOGIN_URL 後會在網址後面加 QueryString ?next=<原本的 url>
         # 處理 next
-        next = req.POST.get("next", "/")
+        next = req.POST.get("next", reverse("pages:index"))
 
         return redirect(next)
     else:

@@ -19,6 +19,7 @@ def index(req):
         interview = form.save(commit=False) # 先把資料準備好，不存到資料庫
         interview.user = req.user
         interview.save()
+        
         # --------------------------------------
         # DEPRECATED: 舊的實作方式
         # 原因: 效能較差，程式碼冗長
