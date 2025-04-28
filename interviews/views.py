@@ -1,7 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Interview, Comment, FavoriteInterview
-from django.http import HttpResponse, Http404
-from django.urls import reverse
+from .models import Interview
 from .forms import InterviewForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
@@ -116,7 +114,7 @@ def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
         # --------------------------------------
         
         # Interview 角度
-        comments = interview.comment_set.order_by("-created_at")
+        comments = interview.comment_set.prefetch_related("user").order_by("-created_at")
         return render(req, "interviews/show.html", {"interview": interview, "comments": comments})
 
 @login_required

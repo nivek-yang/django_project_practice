@@ -21,9 +21,12 @@
 
 <hr />
 
-<ul>
+<ul class="list">
     {% for comment in comments %}
-    <li>{{ comment.content }} user: {{ comment.user }} created at: {{ comment.created_at }}</li>
+    <li class="my-2">
+        <p>{{ comment.user }} 説： <br /> {{ comment.content|linebreaks }}</p>
+        <p>created at: {{ comment.created_at }}</p>  
+    </li>
     {% endfor %}
 </ul>
 
