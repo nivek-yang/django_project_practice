@@ -14,7 +14,7 @@ class Interview(models.Model):
     favorited_by = models.ManyToManyField(
         User,
         through="FavoriteInterview",
-        related_name="favorite_interview", # join 欄位
+        related_name="favorite_interviews", # join 欄位
     )
 
 # - Table

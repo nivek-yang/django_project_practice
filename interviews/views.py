@@ -174,12 +174,21 @@ def favorite(req, id):
     interview = get_object_or_404(Interview, pk=id)
     user = req.user
 
-    if user.favorite_interview.filter(pk=interview.pk).exists():
-        # 有
-        user.favorite_interview.remove(interview)
+    # # 判斷這位使用者是否已經按過讚
+    # if user.favorite_interviews.filter(pk=interview.pk).exists():
+    #     # 如果有按過讚，則取消按讚（remove）
+    #     user.favorite_interviews.remove(interview)
+    # else:
+    #     # 如果沒有按過讚，則加上（add）
+    #     user.favorite_interviews.add(interview)
+
+    # 從 FavoriteInterview model 的角度
+    favorite_interview = FavoriteInterview.objects.filter(user=user, interview=interview)
+
+    if favorite_interview.exists():
+        favorite_interview.delete()
     else:
-        # 沒有
-        user.favorite_interview.add(interview)
+        FavoriteInterview.objects.create(user=user, interview=interview)
 
     return redirect("interviews:show", id=interview.id)
 
