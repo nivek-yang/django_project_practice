@@ -11,7 +11,7 @@
     {% comment %} htmx CDN {% endcomment %}
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
 </head>
-<body>
+<body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
     {% include "shared/navbar.html" %}
 
     {% comment %} <nav>

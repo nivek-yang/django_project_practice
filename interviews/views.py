@@ -199,7 +199,8 @@ def favorite(req, id):
     # else:
     #     FavoriteInterview.objects.create(user=user, interview=interview)
 
-    return redirect("interviews:show", id=interview.id)
+    return render(req, "interviews/favorite.html", {"user": req.user, "interview": interview})
+    # return redirect("interviews:show", id=interview.id)
 
 
     
