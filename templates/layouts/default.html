@@ -13,6 +13,7 @@
 </head>
 <body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
     {% include "shared/navbar.html" %}
+    {% include "shared/messages.html" %}
 
     {% comment %} <nav>
         <a href="{% url 'pages:index' %}">首頁</a>

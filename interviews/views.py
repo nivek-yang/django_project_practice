@@ -199,6 +199,7 @@ def favorite(req, id):
     # else:
     #     FavoriteInterview.objects.create(user=user, interview=interview)
 
+    # 回傳一顆按鈕，而不是整個網頁
     return render(req, "interviews/favorite.html", {"user": req.user, "interview": interview})
     # return redirect("interviews:show", id=interview.id)
 

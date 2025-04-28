@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 # django decorator
 from django.views.decorators.http import require_POST
 from django.urls import reverse
+from django.contrib import messages
 
 # Create your views here.
 @require_POST
@@ -47,7 +48,7 @@ def create_session(req):
         # @login_required 返回 LOGIN_URL 後會在網址後面加 QueryString ?next=<原本的 url>
         # 處理 next
         next = req.POST.get("next", reverse("pages:index"))
-
+        messages.success(req, "登入成功")
         return redirect(next)
     else:
         return redirect("users:sign_in")
@@ -55,5 +56,5 @@ def create_session(req):
 @require_POST
 def delete_session(req):
     logout(req)
-
+    messages.success(req, "已登出")
     return redirect("pages:index")
