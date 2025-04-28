@@ -172,28 +172,26 @@ def comment(req, id):
 @login_required
 def favorite(req, id):
     interview = get_object_or_404(Interview, pk=id)
-    user = req.user
-
-    
-    # # 以 User model 的角度處理 ManyToMany 關聯
-    # # 判斷這位使用者是否已經按過讚
-    # if user.favorite_interviews.filter(pk=interview.pk).exists():
-    #     # 如果有按過讚，則取消按讚（remove）
-    #     user.favorite_interviews.remove(interview)
-    # else:
-    #     # 如果沒有按過讚，則加上（add）
-    #     user.favorite_interviews.add(interview)
-
-    # 以 Interview model 的角度處理 ManyToMany 關聯
-    # 判斷這篇文章是否已經被按過讚
-    if interview.favorited_by.filter(pk=user.pk).exists():
+    favorites = req.user.favorite_interviews
+    # 以 User model 的角度處理 ManyToMany 關聯
+    # 判斷這位使用者是否已經按過讚
+    if favorites.filter(pk=interview.pk).exists():
         # 如果有按過讚，則取消按讚（remove）
-        interview.favorited_by.remove(user)
+        favorites.remove(interview)
     else:
         # 如果沒有按過讚，則加上（add）
-        interview.favorited_by.add(user)
+        favorites.add(interview)
 
-    # # 從 FavoriteInterview model 的角度
+    # # 以 Interview model 的角度處理 ManyToMany 關聯
+    # # 判斷這篇文章是否已經被按過讚
+    # if interview.favorited_by.filter(pk=user.pk).exists():
+    #     # 如果有按過讚，則取消按讚（remove）
+    #     interview.favorited_by.remove(user)
+    # else:
+    #     # 如果沒有按過讚，則加上（add）
+    #     interview.favorited_by.add(user)
+
+    # # 以 FavoriteInterview model 的角度處理 ManyToMany 關聯
     # favorite_interview = FavoriteInterview.objects.filter(user=user, interview=interview)
 
     # if favorite_interview.exists():

@@ -4,7 +4,12 @@
 
 <form action="{% url 'interviews:favorite' interview.id %}" method="post">
     {% csrf_token %}
-    <button class="btn btn-primary" >收藏</button>
+    {% if user in interview.favorited_by.all %}
+        <button class="btn btn-primary" >已收藏</button>
+    {% else %}
+        <button class="btn btn-ghost" >收藏</button>
+    {% endif %}
+
 </form>
 <h1>公司: {{ interview.company_name }}</h1>
 <h2>職位: {{ interview.position }}</h2>
