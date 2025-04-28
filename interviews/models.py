@@ -11,6 +11,11 @@ class Interview(models.Model):
     )
     result = models.CharField(max_length=100, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    favorited_by = models.ManyToManyField(
+        User,
+        through="FavoriteInterview",
+        related_name="favorite_interview", # join 欄位
+    )
 
 # - Table
 #     - 公司名稱 company_name
