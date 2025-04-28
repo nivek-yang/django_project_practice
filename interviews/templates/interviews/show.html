@@ -2,15 +2,8 @@
 
 {% block main %}
 
-<form action="{% url 'interviews:favorite' interview.id %}" method="post">
-    {% csrf_token %}
-    {% if user in interview.favorited_by.all %}
-        <button class="btn btn-primary" >已收藏</button>
-    {% else %}
-        <button class="btn btn-ghost" >收藏</button>
-    {% endif %}
+{% include 'interviews/favorite.html' %}
 
-</form>
 <h1>公司: {{ interview.company_name }}</h1>
 <h2>職位: {{ interview.position }}</h2>
 <h2>面試日期: {{ interview.interview_date }}</h2>
