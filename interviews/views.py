@@ -5,6 +5,7 @@ from django.urls import reverse
 from .forms import InterviewForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from django.contrib import messages
 
 # Create your views here.
 def index(req):
@@ -44,7 +45,7 @@ def index(req):
         #     result=result,
         # )
         # --------------------------------------
-        
+        messages.success(req, "新增面試成功")
         return redirect("interviews:show", id=interview.id)
     else:
         # 顯示所有面試記錄列表
@@ -91,7 +92,7 @@ def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
         # interview.save()
 
         # --------------------------------------
-
+        messages.success(req, "更新面試成功")
         return redirect("interviews:show", interview.id)
 
     else:
@@ -134,7 +135,7 @@ def delete(req, id):
     
     # hard delete
     interview.delete()
-
+    messages.success(req, "面試已刪除")
     return redirect("interviews:index")
 
 @require_POST
