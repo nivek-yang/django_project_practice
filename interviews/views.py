@@ -174,7 +174,14 @@ def favorite(req, id):
     interview = get_object_or_404(Interview, pk=id)
     user = req.user
 
-    FavoriteInterview.objects.create(user=user, interview=interview)
+    f = FavoriteInterview.objects.filter(user=user, interview=interview)
+
+    if f:
+        # 有
+        f.delete()
+    else:
+        # 沒有
+        FavoriteInterview.objects.create(user=user, interview=interview)
 
     return redirect("interviews:show", id=interview.id)
 
