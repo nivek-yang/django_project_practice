@@ -116,7 +116,7 @@ def show(req, id): # 參數要多加 id，從 urls 傳來的關鍵字引數
         # --------------------------------------
         
         # Interview 角度
-        comments = interview.comment_set.all()
+        comments = interview.comment_set.order_by("-created_at")
         return render(req, "interviews/show.html", {"interview": interview, "comments": comments})
 
 @login_required

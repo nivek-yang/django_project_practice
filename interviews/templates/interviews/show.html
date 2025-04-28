@@ -23,7 +23,7 @@
 
 <ul>
     {% for comment in comments %}
-    <li>{{ comment.content }}</li>
+    <li>{{ comment.content }} user: {{ comment.user }} created at: {{ comment.created_at }}</li>
     {% endfor %}
 </ul>
 
