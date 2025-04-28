@@ -2,7 +2,7 @@
 
 {% block main %}
 
-{% include 'interviews/favorite.html' %}
+{% include 'interviews/favorite.html' with user=user interview=interview %}
 
 <h1>公司: {{ interview.company_name }}</h1>
 <h2>職位: {{ interview.position }}</h2>
