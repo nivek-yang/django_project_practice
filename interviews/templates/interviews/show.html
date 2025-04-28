@@ -1,6 +1,11 @@
 {% extends "layouts/default.html" %}
 
 {% block main %}
+
+<form action="{% url 'interviews:favorite' interview.id %}" method="post">
+    {% csrf_token %}
+    <button class="btn btn-primary" >收藏</button>
+</form>
 <h1>公司: {{ interview.company_name }}</h1>
 <h2>職位: {{ interview.position }}</h2>
 <h2>面試日期: {{ interview.interview_date }}</h2>

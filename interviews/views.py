@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Interview, Comment
+from .models import Interview, Comment, FavoriteInterview
 from django.http import HttpResponse, Http404
 from django.urls import reverse
 from .forms import InterviewForm
@@ -167,3 +167,17 @@ def comment(req, id):
     
     # redirect
     return redirect("interviews:show", id=interview.id)
+
+@require_POST
+@login_required
+def favorite(req, id):
+    interview = get_object_or_404(Interview, pk=id)
+    user = req.user
+
+    FavoriteInterview.objects.create(user=user, interview=interview)
+
+    return redirect("interviews:show", id=interview.id)
+
+
+    
+    
