@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "buildjs": "esbuild src/app.js --bundle --outfile=./static/assets/scripts/app.js",
+    "dev": "esbuild src/app.js --bundle --outfile=./static/assets/scripts/app.js --watch"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.4"
+  },
+  "dependencies": {
+    "alpinejs": "^3.14.9",
+    "htmx.org": "^1.9.12"
+  }
+}
