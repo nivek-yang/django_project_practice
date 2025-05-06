@@ -5,40 +5,64 @@ A web platform built with Django that allows users to share and discuss their in
 ## Features
 
 - Share interview experiences
-- Browse interview reviews by company
 - Comment and discuss on interview reviews
+- User authentication (Sign up, Sign in, Logout)
+- Favorite interviews to collect
+- Flash messages for user feedback
+- Responsive design with Tailwind CSS and DaisyUI
+- Dynamic interactions using HTMX and Alpine.js
 
 ## Tech Stack
 
-- **Backend**: Django 5.2
-- **Frontend**: HTML
+- **Backend**: Django
+- **Frontend**: HTML, Tailwind CSS, DaisyUI
 - **Database**: SQLite3
 - **Template Engine**: Django Templates
+- **Dynamic Interactions**: HTMX, Alpine.js
 
 ## Project Structure
 
 ```
 .
-├── interviews/            # Interview review application
-│   ├── templates/        # HTML templates
-│   ├── views.py         # View controllers
-│   ├── models.py        # Database models
-│   └── urls.py          # URL routing
-├── pages/                # Static pages application
-│   ├── templates/       # HTML templates
-│   ├── views.py        # View controllers
-│   └── urls.py         # URL routing
-├── my_project/          # Project settings
-│   ├── settings.py     # Django settings
-│   └── urls.py         # Main URL routing
-├── manage.py            # Django management script
-├── requirements.txt     # Project dependencies
-└── db.sqlite3          # SQLite database
+├── interviews/            
+│   ├── templates/         
+│   ├── views.py           
+│   ├── models.py          
+│   ├── forms.py           
+│   ├── urls.py            
+│   └── migrations/        
+├── pages/                 
+│   ├── templates/         
+│   ├── views.py           
+│   ├── urls.py            
+│   └── migrations/        
+├── users/                 
+│   ├── templates/         
+│   ├── views.py           
+│   ├── forms.py           
+│   ├── urls.py            
+│   └── migrations/        
+├── templates/             
+│   ├── layouts/           
+│   ├── shared/            
+├── my_project/            
+│   ├── settings.py        
+│   ├── urls.py            
+│   ├── asgi.py            
+│   └── wsgi.py            
+├── manage.py              
+├── requirements.txt       
+├── db.sqlite3             
+└── Makefile               
 ```
 
 ## Getting Started
 
-1. Clone the repository
+1. Clone the repository:
+   ```
+   git clone <repository-url>
+   cd 0411_project_interview_review
+   ```
 2. Create a virtual environment:
    ```
    python -m venv .venv
@@ -56,3 +80,17 @@ A web platform built with Django that allows users to share and discuss their in
    ```
    python manage.py runserver
    ```
+6. Access the application at:
+   ```
+   http://127.0.0.1:8000/
+   ```
+
+## Notes
+
+- Ensure Python 3.13 or higher is installed.
+- Use the `Makefile` for common commands:
+  ```
+  make runserver
+  make makemigrations
+  make migrate
+  ```
