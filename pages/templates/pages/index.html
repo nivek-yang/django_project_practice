@@ -1,7 +1,12 @@
 {% extends "layouts/default.html" %}
+{% load static %}
+
+
 
 {% block main %}
+
 <h1>Home</h1>
+<img src="{% static 'interviews/image.png' %}" alt="">
 {% if request.user.is_authenticated %}
     已登入
 {% endif %}
