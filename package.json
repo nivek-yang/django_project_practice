@@ -1,7 +1,6 @@
 {
   "scripts": {
-    "js": "esbuild src/scripts/app.js --bundle --outfile=./static/assets/scripts/app.js --watch",
-    "css": "npx @tailwindcss/cli -i ./src/styles/app.css -o ./static/assets/styles/app.css --watch",
+    "dev": "concurrently 'esbuild ./src/scripts/app.js --bundle --outfile=./static/assets/scripts/app.js --watch' 'npx @tailwindcss/cli -i ./src/styles/app.css -o ./static/assets/styles/app.css --watch'",
     "build": "esbuild src/scripts/app.js --bundle --outfile=./static/assets/scripts/app.js && npx tailwindcss -i ./src/styles/app.css -o ./static/assets/styles/app.css"
   },
   "devDependencies": {
