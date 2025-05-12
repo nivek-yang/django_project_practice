@@ -1,34 +1,17 @@
 {% extends "layouts/default.html" %}
 {% block main %}
-<script src="https://js.braintreegateway.com/web/dropin/1.44.1/js/dropin.min.js"></script>
 
 
 <h1>付款</h1>
 
-<form action="{% url 'pages:paid' %}" method="post" id="payment-form">
+<form x-data="braintree_form"
+    action="{% url 'pages:paid' %}" 
+    method="post" id="payment-form"
+    data-token="{{ token }}">
     {% csrf_token %}
-    <div id="dropin-container"></div>
-    <input type="text" class="input" id="nonce" name="nonce">
+    <div x-ref="dropin"></div>
+    <input type="hidden" x-ref="nonce" name="nonce">
     <button type="submit" class="btn btn-neutral">付款</button>
 </form>
-
-<script type="text/javascript">
-    braintree.dropin.create({
-        authorization: "{{ token }}",
-        container: '#dropin-container'
-    }).then((dropinInstance) => {
-        const form = document.querySelector("#payment-form")
-        form.addEventListener('submit', (e) => {
-            e.preventDefault()
-            dropinInstance.requestPaymentMethod().then(({nonce}) => {
-                document.querySelector('#nonce').value = nonce
-                form.submit()
-                
-            })
-        })
-    }).catch((error) => {});
-</script>
-
-
 {% endblock %}
 
