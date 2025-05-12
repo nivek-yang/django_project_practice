@@ -6,21 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>面試</title>
 
-    {% comment %} 掛載 daisyUI 和 Tailwind css CDN，daisyUI 要在上面 {% endcomment %}
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    {% comment %} htmx CDN {% endcomment %}
+    <link href="{% static 'assets/styles/app.css' %}" rel="stylesheet" type="text/css" />
     <script type="module" src="{% static 'assets/scripts/app.js' %}"></script>
 </head>
 <body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
     {% include "shared/navbar.html" %}
     {% include "shared/messages.html" %}
 
-    {% comment %} <nav>
-        <a href="{% url 'pages:index' %}">首頁</a>
-        <a href="{% url 'pages:about' %}">關於我們</a>
-        <a href="{% url 'pages:contact' %}">聯絡我們</a>
-    </nav> {% endcomment %}
     
     <main class="container mx-auto my-6">{% block main %}{% endblock %}</main>
     {% include "shared/footer.html" %}

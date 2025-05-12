@@ -1,10 +1,17 @@
 {
   "scripts": {
-    "buildjs": "esbuild src/app.js --bundle --outfile=./static/assets/scripts/app.js",
-    "dev": "esbuild src/app.js --bundle --outfile=./static/assets/scripts/app.js --watch"
+    "js": "esbuild src/scripts/app.js --bundle --outfile=./static/assets/scripts/app.js --watch",
+    "css": "npx @tailwindcss/cli -i ./src/styles/app.css -o ./static/assets/styles/app.css --watch",
+    "build": "esbuild src/scripts/app.js --bundle --outfile=./static/assets/scripts/app.js && npx tailwindcss -i ./src/styles/app.css -o ./static/assets/styles/app.css"
   },
   "devDependencies": {
-    "esbuild": "^0.25.4"
+    "@tailwindcss/cli": "^4.1.5",
+    "concurrently": "^9.1.2",
+    "daisyui": "^5.0.35",
+    "esbuild": "^0.25.4",
+    "install": "^0.13.0",
+    "npm": "^11.3.0",
+    "tailwindcss": "^3.4.17"
   },
   "dependencies": {
     "alpinejs": "^3.14.9",
